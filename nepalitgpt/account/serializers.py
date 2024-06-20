@@ -6,17 +6,17 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 # For New user registrations
 class UserSerializer(serializers.ModelSerializer):
-    password2 = serializers.CharField(style={'input_type':'password'},write_only=True)
+    confirm_password = serializers.CharField(style={'input_type':'password'},write_only=True)
     class Meta:
         model = User
-        fields = ['email','password','password2']
+        fields = ['email','password','confirm_password']
         extra_kwargs = {
             'password': {'write_only':True}
         }
 
     def validate(self,data):
         # confirm passord 
-        if data['password'] != data['password2']:
+        if data['password'] != data['confirm_password']:
             raise serializers.ValidationError({"error": "Password and Confirm Password doesn't match!"})
         # Password Strength validation
         password = data['password']
