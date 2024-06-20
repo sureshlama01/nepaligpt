@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
 
 # Custom user model
 class User(AbstractBaseUser):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,null=True,blank=True)
     email = models.EmailField(verbose_name="email address", max_length=255,unique=True,)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -38,7 +38,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["name",'term_conditions']
+    REQUIRED_FIELDS = ['term_conditions']
 
     def __str__(self):
         return self.email
