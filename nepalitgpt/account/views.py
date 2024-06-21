@@ -173,7 +173,7 @@ PrinceLap Support Team
                 fail_silently= True,
                     )  
                 # password_reset_task.delay(detail) ==>> to use celery task make tasks.py file
-                return Response({'message': 'Check your email to reset password','url':reset_url})
+                return Response({'message': 'Check your email to reset password','emailToken':{"encoded_pk":encoded_pk,"token":token}})
             else:
                 return Response({'error': 'User does not exists'},status=status.HTTP_400_BAD_REQUEST)
         else:
