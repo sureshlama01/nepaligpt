@@ -94,13 +94,13 @@ class ChangePasswordView(ModelViewSet):
             }
             mail_subject = "Your Password Has Been Changed Successfully"
             message = f'''
-Dear {self.request.user.name},
+Dear ,
 
 We wanted to let you know that your password was successfully changed. If you made this change, no further action is needed.
 
 Account Details:
 
-Username: {self.request.user.name}
+Username:
 Email: {self.request.user.email}
 Didn't request this change?
 If you didn't change your password, please contact us immediately at [Support Email] or [Support Phone Number].
@@ -146,10 +146,10 @@ class PasswordResetView(ModelViewSet):
                 )
                 # Here you can add website url
                 reset_url = f"http://127.0.0.1:8000/{reset_url}"
-                detail = {'username':user.name,'email': user.email,'reset_url': reset_url}
+                detail = {'username':"guest",'email': user.email,'reset_url': reset_url}
                 mail_subject = 'Password Reset Request for Your Account.'
                 message = f'''
-Dear {user.name},
+Dear,
 
 We have received a request to reset the password for your account. To initiate the password reset process, please click on the link below:
 
@@ -191,13 +191,13 @@ class PasswordResetConfirm(ModelViewSet):
             user = User.objects.get(pk=pk)
             mail_subject = "Your Password Has Been Changed Successfully"
             message = f'''
-Dear {user.name},
+Dear,
 
 We wanted to let you know that your password was successfully changed. If you made this change, no further action is needed.
 
 Account Details:
 
-Username: {user.name}
+Username:
 Email: {user.email}
 Password Change Date: {current_datetime}
 Didn't request this change?
